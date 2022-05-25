@@ -12,7 +12,7 @@ interface ContainerProps {
   type: 'up' | 'down';
 }
 
-export const Container = styled.View<ContainerProps>`
+export const Container = styled(RectButton)<ContainerProps>`
   width: 48%;
   border-width: ${({ isActive, type }) =>isActive ? 0 : 1.5}px;
   border-style: solid;

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
+import { useNavigation } from '@react-navigation/native';
 import { 
   Modal, 
   TouchableWithoutFeedback, 
@@ -49,23 +51,26 @@ export function Register() {
     name: 'Categoria'
   });
 
+  const navigation = useNavigation();
+
   const { 
     handleSubmit, 
     control, 
+    reset, 
     formState: { errors }
   } = useForm({
     resolver: yupResolver(schema)
   });
 
-  function handleTransactionTypeSelect(type: 'up' | 'down') {
+  function handleTransactionsTypeSelect(type: 'positive' | 'negative'){
     setTransactionType(type);
   }
 
-  function handleOpenCategorySelectModal() {
+  function handleOpenSelectCategoryModal(){
     setCategoryModalOpen(true);
   }
 
-  function handleCloseCategorySelectModal() {
+  function handleCloseSelectCategoryModal(){
     setCategoryModalOpen(false);
   }
 
@@ -77,10 +82,12 @@ export function Register() {
       return Alert.alert('Selecione uma categoria');
 
     const newTransaction = {
+      id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
       transactionType,
-      category: category.key
+      category: category.key,
+      date: new Date()
     }
     try {
       const data = await AsyncStorage.getItem(dataKey);
@@ -93,19 +100,20 @@ export function Register() {
 
       await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
 
+      reset();
+      setTransactionType('');
+      setCategory({
+        key: 'category',
+        name: 'Categoria'
+      });
+
+      navigation.navigate('Listagem');
+
     } catch (error) {
       console.log(error);
       Alert.alert('Erro ao salvar transação');
     }
   }
-
-  useEffect(() => {
-    async function loadData() {
-      const data = await AsyncStorage.getItem(dataKey);
-      console.log(JSON.parse(data!));
-    }
-    loadData();
-  } , []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -135,19 +143,19 @@ export function Register() {
               <TransactionTypeButton 
                 type="up"
                 title="income"
-                onPress={() => handleTransactionTypeSelect('up')}
-                isActive={transactionType === 'up'}
+                onPress={() => handleTransactionsTypeSelect('positive')}
+                isActive={transactionType === 'positive'}
               />
               <TransactionTypeButton 
                 type="down"
                 title="outcome"
-                onPress={() => handleTransactionTypeSelect('down')}
-                isActive={transactionType === 'down'}
+                onPress={() => handleTransactionsTypeSelect('negative')}
+                isActive={transactionType === 'negative'}
               />
             </TransactionTypes>
             <CategorySelectButton 
               title={category.name}
-              onPress={() => handleOpenCategorySelectModal()}
+              onPress={handleOpenSelectCategoryModal}
             />
           </Fields>
 
@@ -161,7 +169,7 @@ export function Register() {
           <CategorySelect 
             category={category} 
             setCategory={setCategory}
-            closeSelectCategory={handleCloseCategorySelectModal}
+            closeSelectCategory={handleCloseSelectCategoryModal}
           />
         </Modal>
       </Container>
