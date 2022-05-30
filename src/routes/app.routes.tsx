@@ -3,8 +3,8 @@ import { useTheme } from 'styled-components';
 import { Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from  '@react-navigation/bottom-tabs';
-import { Dashboard } from '../screens/Dashboard';
-import { Register } from '../screens/Register';
+import { Dashboard } from '../Screens/Dashboard';
+import { Register } from '../Screens/Register';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
