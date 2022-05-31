@@ -5,9 +5,9 @@ export const Container = styled.View`
   width: 100%;
 `;
 
-export const Error = styled.View`
-  color: ${({ theme }) => theme.colors.attention};
-  font-size: ${RFValue(14)};
+export const Error = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: ${RFValue(14)}px;
+  color: ${({ theme }) => theme.colors.attention};
   margin: 7px 0;
 `;
