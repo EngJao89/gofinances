@@ -78,6 +78,31 @@ function AuthProvider({ children } : AuthProviderProps) {
   )
 }
 
+async function signInWithApple() {
+  try {
+    const credential = await AppleAuthentication.signInAsync({
+      requestedScopes: [
+        AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+        AppleAuthentication.AppleAuthenticationScope.EMAIL,
+      ]
+    });
+
+    if (credential) {
+      const userLogged = {
+        id: String(credential.user),
+        email: credential.email!,
+        name: credential.fullName!.givenName!,
+        photo: undefined
+      };
+
+      setUser(userLogged);
+      await AsyncStorage.setItem(userStorageKey, JSON.stringify(userLogged));
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 function useAuth() {
   const context= useContext(AuthContext);
 
