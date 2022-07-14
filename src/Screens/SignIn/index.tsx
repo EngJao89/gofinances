@@ -18,7 +18,7 @@ import {
   SignInTitle,
   Footer,
   FooterWrapper
-} from './styles';
+ } from './styles';
 
 export function SignIn() {
   const { signInWithGoogle, signInWithApple } = useAuth();

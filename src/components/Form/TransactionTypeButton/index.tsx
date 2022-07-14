@@ -29,6 +29,7 @@ export function TransactionTypeButton({
     <Container
       isActive={isActive}
       type={type}
+      
     >
       <Button
         {...rest}
