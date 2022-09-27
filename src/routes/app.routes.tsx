@@ -15,15 +15,7 @@ export function AppRoutes(){
 
   return(
     <Navigator
-      tabBarOptions={{
-        activeTintColor: theme.colors.secondary,
-        inactiveTintColor: theme.colors.text,
-        labelPosition: 'beside-icon',
-        style: {
-          paddingVertical: Platform.OS === 'ios' ? 20 : 0,
-          height: 88
-        }
-      }}
+      screenOptions={{ headerShown: false }}
     >
       <Screen
         name="Listagem"
