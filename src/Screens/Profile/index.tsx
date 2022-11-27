@@ -8,17 +8,21 @@ import {
 
 
 
-export function Profile() {
+export function Profile(){
   return (
     <View >
-      <Text>Perfil</Text>
+      <Text testID="text-title">
+        Perfil
+      </Text>
 
       <TextInput 
+        testID="input-name"
         placeholder="Nome" 
         autoCorrect={false}
       />
 
       <TextInput 
+        testID="input-surname"
         placeholder="Sobrenome"
       />
 
