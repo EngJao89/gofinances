@@ -13,7 +13,7 @@ const Providers: React.FC = ({ children }) => (
 
 describe('Input component', () => {
   it('Input render exists', () => {
-    const { debug } = render(
+    const { getByTestId } = render(
       <Input 
         testID="input-email"
         placeholder="E-mail"
@@ -22,7 +22,7 @@ describe('Input component', () => {
         active={true}
       />,
       {
-        wrapper:
+        wrapper: Providers
       }
     );
 
