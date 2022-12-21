@@ -3,10 +3,15 @@
     "name": "gofinances",
     "slug": "gofinances",
     "version": "1.0.0",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/icon.png",
     "assetBundlePatterns": [
       "**/*"
     ],
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#5636D3"
+    },
     "ios": {
       "bundleIdentifier": "com.gofinances",
       "buildNumber": "1.0.0"
