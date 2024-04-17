@@ -4,9 +4,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Dashboard } from '../screens/Dashboard';
-import { Register } from '../screens/Register';
-import { Resume } from '../screens/Resume';
+import { Dashboard } from '../Screens/Dashboard';
+import { Register } from '../Screens/Register';
+import { Resume } from '../Screens/Resume';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
